@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Login from './Components/LoginForm'
+import Signup from './Components/SignupForm'
+
 import './App.css';
 
+import HeadContainer from './Containers/HeadContainer'
+import BottonContainer from './Containers/BottonContainer'
+
 class App extends Component {
+  state = {
+    searchTerm: ''
+  }
+  
+  handleSearch = (e) => {
+    this.setState({
+      searchTerm: e.target.value
+    })
+  }
+
   render() {
+    // console.log(this.state.searchTerm)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/>
+        {/* <BottonContainer /> */}
       </div>
     );
   }

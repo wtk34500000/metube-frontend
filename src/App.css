@@ -19,6 +19,11 @@
   color: white;
 }
 
+.logo {
+  position: relative;
+  float: left;
+}
+
 .App-link {
   color: #61dafb;
 }
