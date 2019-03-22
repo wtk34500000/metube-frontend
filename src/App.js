@@ -80,7 +80,8 @@ class App extends Component {
           <Switch>
               <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route Path ='/' component={HeadContainer} />
+              <Route path ='/signup' render={()=> <HomeContainer videos={this.state.videos}/>} />
+              {/* <Route Path ='/' component={HeadContainer} /> */}
               {/* <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/> */}
               {/* <BottonContainer /> */}
           </Switch>

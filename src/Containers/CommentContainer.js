@@ -1,5 +1,5 @@
 import React from 'react'
-import Comment from '../Components/comment'
+import Comment from '../Components/Comment'
 
 class CommentContainer extends React.Component {
     render(){
