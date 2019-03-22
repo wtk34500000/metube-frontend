@@ -23,6 +23,7 @@ const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
+<<<<<<< HEAD
     // searchTerm: '',
     currentUser: {},
     videos: []
@@ -49,10 +50,25 @@ class App extends Component {
             })
       })
    
+
   }
 
   handleSignup = (userObj)=>{
-      console.log(userObj)
+      fetch("http://localhost:4000/users", {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({user:{
+          first_name: userObj.first_name,
+          last_name: userObj.last_name,
+          user_name: userObj.user_name,
+          user_email: userObj.email,
+          password: userObj.password
+        }})
+      }).then(res => res.json)
+      .then(json => console.log)
   }
 
   handleLogin = (userObj) => {
@@ -65,9 +81,15 @@ class App extends Component {
     return (
       <div className="App">
           <Switch>
+<<<<<<< HEAD
               <Route path ='/login' render={()=> <Login handleSubmit={this.handleSignup}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleLogin}/>} />
               <Route Path ='/' render={()=> <HomeContainer videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+=======
+              <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
+              <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
+              <Route Path ='/' component={HeadContainer} />
+>>>>>>> 9330fecce2bf8812a12a4b3004d12e2293397705
               {/* <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/> */}
               {/* <BottonContainer /> */}
           </Switch>
