@@ -23,8 +23,6 @@ const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
-<<<<<<< HEAD
-    // searchTerm: '',
     currentUser: {},
     videos: []
     
@@ -49,7 +47,6 @@ class App extends Component {
               videos :videos,
             })
       })
-   
 
   }
 
@@ -81,15 +78,9 @@ class App extends Component {
     return (
       <div className="App">
           <Switch>
-<<<<<<< HEAD
-              <Route path ='/login' render={()=> <Login handleSubmit={this.handleSignup}/>} />
-              <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleLogin}/>} />
-              <Route Path ='/' render={()=> <HomeContainer videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
-=======
               <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
               <Route Path ='/' component={HeadContainer} />
->>>>>>> 9330fecce2bf8812a12a4b3004d12e2293397705
               {/* <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/> */}
               {/* <BottonContainer /> */}
           </Switch>
