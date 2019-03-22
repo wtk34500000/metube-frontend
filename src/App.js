@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom'
 import Login from './Components/LoginForm'
 import Signup from './Components/SignupForm'
 
@@ -9,7 +10,9 @@ import BottonContainer from './Containers/BottonContainer'
 
 class App extends Component {
   state = {
-    searchTerm: ''
+    searchTerm: '',
+    currentUser: {}
+    
   }
   
   handleSearch = (e) => {
@@ -18,12 +21,25 @@ class App extends Component {
     })
   }
 
+  handleSignup = (userObj)=>{
+      console.log(userObj)
+  }
+
+  handleLogin = (userObj) => {
+    console.log(userObj)
+  }
+
   render() {
-    // console.log(this.state.searchTerm)
+    console.log(this.state.searchTerm)
     return (
       <div className="App">
-        <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/>
-        {/* <BottonContainer /> */}
+          <Switch>
+              <Route path ='/login' render={()=> <Login handleSubmit={this.handleSignup}/>} />
+              <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleLogin}/>} />
+              <Route Path ='/' component={HeadContainer} />
+              {/* <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/> */}
+              {/* <BottonContainer /> */}
+          </Switch>
       </div>
     );
   }

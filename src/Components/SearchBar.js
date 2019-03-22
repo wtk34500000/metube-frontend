@@ -4,7 +4,7 @@ const SearchBar = (props) => {
  
         return (
             <div className="search-bar">
-                <input type="text" name="input" value={props.searchTerm} onChange={props.handleSearch} />
+                Search: <input type="text" name="input" value={props.searchTerm} onChange={props.handleSearch} />
             </div>
         )
     

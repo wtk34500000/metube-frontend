@@ -22,7 +22,28 @@
 .logo {
   position: relative;
   float: left;
+  margin-left: 20px;
 }
+
+.signup-button {
+  position: relative;
+  float: left;
+  margin-left: 500px;
+}
+
+.login-button {
+  position: relative;
+  float: left;
+  margin-left: 20px;
+}
+
+.search-bar {
+  position: relative;
+  float: left;
+  margin-left: 700px;
+ 
+}
+
 
 .App-link {
   color: #61dafb;
