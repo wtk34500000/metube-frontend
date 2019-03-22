@@ -6,10 +6,17 @@ import LoginButton from '../Components/LoginButton'
 
 
 const HeadContainer = (props) => {
+
+    // componentDidMount(){
+    //     fetch('http://localhost:4000/users')
+    //     .then(res => res.json())
+    //     .then(console.log)
+    // }
+
     return (
        <div className="head-container">
         <Logo />
-        <SearchBar searchTerm={props.searchTerm} handleSearch={props.handleSearch}/>
+        <SearchBar handleSearch={props.handleSearch}/>
         <SignupButton />
         <LoginButton />
         {/* <button></button>

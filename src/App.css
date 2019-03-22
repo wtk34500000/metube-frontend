@@ -18,6 +18,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.head-container{
+  display: flex;
+  margin: 10px;
+  border: 1px solid black
+}
 
 .logo {
   position: relative;
@@ -29,21 +34,65 @@
   position: relative;
   float: left;
   margin-left: 500px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .login-button {
   position: relative;
   float: left;
   margin-left: 20px;
+  margin-top: auto;
+  margin-bottom:auto;
 }
 
 .search-bar {
   position: relative;
   float: left;
   margin-left: 700px;
+  margin-top: auto;
+  margin-bottom:auto;
  
 }
 
+.botton-container {
+  margin: 10px;
+  display: flex;
+}
+
+.video-detail-container {
+  width: 69vw;
+  height: 90vh;
+  border: 2px solid black;
+}
+
+.head-contain {
+  width: 100%;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.video-list-container {
+  margin-left: 20px;
+  width: 30vw;
+  height: 90vh;
+  border: 2px solid black;
+  
+}
+
+.video-detail {
+  margin: 20px;
+  width: 67vw;
+  height: 50vh;
+  border: 2px solid black;
+}
+
+.comment-container {
+  margin: 20px;
+  width: 67vw;
+  height: 27vh;
+  border: 2px solid black;
+}
 
 .App-link {
   color: #61dafb;
