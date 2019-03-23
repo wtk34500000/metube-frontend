@@ -3,22 +3,12 @@ import { Route, Switch } from 'react-router-dom'
 import Login from './Components/LoginForm'
 import Signup from './Components/SignupForm'
 import YTSearch from 'youtube-api-search'
-
+import HomeContainer from './Containers/HomeContainer'
 import './App.css';
 
-import HomeContainer from './Containers/HomeContainer'
 
 
 
-
-// const API_KEY="AIzaSyCPDRj-AZPLJJaaB6z8WUmVKmdvHIpPHZo";
-
-// YTSearch({key:API_KEY, term: term}, (videos)=>{
-//   this.setState({
-//     videos :videos,
-//     selectedVideo:videos[0]
-//   })
-// });
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
@@ -27,17 +17,6 @@ class App extends Component {
     videos: []
     
   }
-  
-  // componentDidMount(){
-  //   axios.creat({
-  //     baseURL: 'https://www.googleapis.com/youtube/v3/',
-  //     params:{
-  //       part: 'snipet',
-  //       maxResults: 5,
-  //       key: process.env.REACT_APP_KEY
-  //     }
-  //   })
-  // }
 
   handleSearchSubmit = (term) => {
       console.log(term)
@@ -73,17 +52,13 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.videos)
-    // console.log("api key", process.env.REACT_APP_KEY)
+    // console.log(this.state.videos)
     return (
       <div className="App">
           <Switch>
               <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/signup' render={()=> <HomeContainer videos={this.state.videos}/>} />
-              {/* <Route Path ='/' component={HeadContainer} /> */}
-              {/* <HeadContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/> */}
-              {/* <BottonContainer /> */}
+              <Route path ='/' render={()=> <HomeContainer videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );
