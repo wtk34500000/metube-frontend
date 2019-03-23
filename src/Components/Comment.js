@@ -1,9 +1,11 @@
 import React from 'react'
 
-const Comment = () => {
+const Comment = (props) => {
+    const arrOfComment = props.comments.map((comment, idx) => <li key={idx} style={{border: "1px solid black"}}>{comment}</li>);
+
     return (
         <div className="comment">
-            <p>comment1: Hello World</p>
+            {arrOfComment}
         </div>
     )
 }

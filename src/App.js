@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
-import Login from './Components/LoginForm'
-import Signup from './Components/SignupForm'
-import YTSearch from 'youtube-api-search'
-import HomeContainer from './Containers/HomeContainer'
+import { Route, Switch } from 'react-router-dom';
+import Login from './Components/LoginForm';
+import Signup from './Components/SignupForm';
+import YTSearch from 'youtube-api-search';
+import HomeContainer from './Containers/HomeContainer';
+import { withRouter } from "react-router-dom";
 import './App.css';
-
-
-
 
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
-    currentUser: {},
+    currentUser: " ",
     videos: []
-    
+  }
+
+  componentDidMount(){
+    let token = localStorage.token;
+
+    token ? this.props.history.push('/') : this.props.history.push('/signup')
   }
 
   handleSearchSubmit = (term) => {
@@ -43,8 +46,13 @@ class App extends Component {
           user_email: userObj.email,
           password: userObj.password
         }})
-      }).then(res => res.json)
-      .then(json => console.log)
+      }).then(res => res.json())
+      .then(currentUser => {
+        this.setState({currentUser}, () => {
+          this.props.history.push('/')
+          localStorage.setItem("token", currentUser.id)
+        })
+      })
   }
 
   handleLogin = (userObj) => {
@@ -52,17 +60,16 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.videos)
     return (
       <div className="App">
           <Switch>
               <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/' render={()=> <HomeContainer videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+              <Route path ='/' render={()=> <HomeContainer currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

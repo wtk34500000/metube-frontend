@@ -1,15 +1,26 @@
 import React from 'react'
 
 const VideDetail = (props) => {
-    let selectedVideoUrl;
-    
-        if(props.videoUrl){
-        selectedVideoUrl=`https://www.youtube.com/watch?v=${props.videoUrl.id.videoId}`;
+        let videoUrl=''
+        if(props.selected!==''){
+              videoUrl = `https://www.youtube.com/embed/${props.selected.id.videoId}?autoplay=1`
         }
-
         return (
             <div className='video-detail'>
-                <h1>Inside video Deatail</h1>
+                <div className="center">
+                    {videoUrl!==''
+                    ? <iframe title={ props.selected.snippet.title } src={videoUrl} allow="autoplay; fullscreen" style={{width:"65vw", height:" 50vh"}}/> 
+                    : <h1>Loading...</h1>}
+                </div>
+                <div className="center" style={{width: "65vw"}}>
+                    {videoUrl!==''
+                    ?  <h2>{ props.selected.snippet.title }</h2>
+                    : null}
+                    
+                    {videoUrl!==''
+                    ?  <p>{ props.selected.snippet.description }</p>
+                    : null}   
+                </div>
             </div>
         )
 }

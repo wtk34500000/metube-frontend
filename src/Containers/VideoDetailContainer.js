@@ -6,8 +6,7 @@ class VideoDetailContainer extends React.Component{
     render(){
         return (
             <div className="video-detail-container">
-                <h1>Video detail Container</h1>
-                <VideoDetail />
+                <VideoDetail selected={this.props.selected}/>
                 <CommentContainer />
             </div>
         )
