@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from "react-router-dom";
 
 
+// *username*{props.currentUser.user_name}
 const LogoutButton = (props) => {
    const handleClick = () =>{
        localStorage.removeItem("token")
@@ -10,7 +11,6 @@ const LogoutButton = (props) => {
 
     return (
         <div id="user-menu">
-            *username*{props.currentUser.user_name}
             <button id="history"><i className="fas fa-folder"></i></button>
             <button onClick={handleClick} id="logout">Log Out</button>
         </div>

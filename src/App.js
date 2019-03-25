@@ -84,8 +84,8 @@ class App extends Component {
       .then(resp => resp.json())
       .then(currentUser => {
         this.setState({currentUser: currentUser.user}, () => {
-          this.props.history.push('/')
           localStorage.setItem("token", currentUser.jwt)
+          this.props.history.push('/')
         })
       })
   }
@@ -93,6 +93,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      {console.log(this.state.currentUser)}
           <Switch>
               <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
