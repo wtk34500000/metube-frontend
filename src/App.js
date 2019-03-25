@@ -7,18 +7,36 @@ import HomeContainer from './Containers/HomeContainer';
 import { withRouter } from "react-router-dom";
 import './App.css';
 
+
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
     currentUser: " ",
-    videos: []
+    videos: [],
+    loginError: false
   }
 
   componentDidMount(){
     let token = localStorage.token;
 
-    token ? this.props.history.push('/') : this.props.history.push('/signup')
+    token ?
+    fetch("http://localhost:4000/user", {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+         Authorization: `${token}`
+      }})
+    .then(resp => resp.json())
+          .then(user => {
+            this.setState({ user }, () => {
+              console.log(user);
+              this.props.history.push("/");
+            });
+          })
+    :
+    this.props.history.push("/signup");
   }
 
   handleSearchSubmit = (term) => {
@@ -55,15 +73,32 @@ class App extends Component {
       })
   }
 
-  handleLogin = (userObj) => {
-    console.log(userObj)
-  }
+  handleLogin = (user) => {
+    this.setState({loginError:false})
+    fetch("http://localhost:4000/login", {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({user})
+    })
+    .then(res => res.json())
+    .then(user => {
+            this.setState({ user }, () => {
+              console.log(user);
+              localStorage.setItem("token", user.id)
+              this.props.history.push("/");
+            });
+          })
+          .catch(error => { this.setState({loginError: true})})
+    }
 
   render() {
     return (
       <div className="App">
           <Switch>
-              <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
+              <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
               <Route path ='/' render={()=> <HomeContainer currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>

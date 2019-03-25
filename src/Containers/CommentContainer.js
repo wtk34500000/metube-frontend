@@ -1,6 +1,7 @@
 import React from 'react'
 import Comment from '../Components/Comment'
 import InputComment from '../Components/InputComment'
+import '../style/video.css'
 
 class CommentContainer extends React.Component {
     state ={
@@ -16,8 +17,8 @@ class CommentContainer extends React.Component {
 
     render(){
         return (
-            <div className='comment-container'>
-                <h1>comment area</h1>
+            <div id='comment-container'>
+                <div id="comment-header">comment area</div>
                 <Comment comments={this.state.comments}/>
                 <InputComment handleSubmit={this.handleSubmit}/>
             </div>

@@ -6,7 +6,7 @@ class BottonContainer extends React.Component {
     state = {
         selected : ''
     }
-    
+
     handleSelectVideo = (videoObj) => {
             this.setState({
                 selected: videoObj
@@ -15,7 +15,7 @@ class BottonContainer extends React.Component {
 
     render(){
         return (
-            <div className='botton-container'>
+            <div id='botton-container'>
                 <VideoDetailContainer selected={this.state.selected}/>
                 <VideoListContainer videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
             </div>
