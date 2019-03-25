@@ -5,7 +5,9 @@ import VideoDetailContainer from '../Containers/VideoDetailContainer'
 class BottonContainer extends React.Component {
     state = {
         selected : '',
-        history: " "
+        history: " ",
+        video: " ",
+        comments: []
     }
 
     handleSelectVideo = (videoObj, currentUser) => {
@@ -25,9 +27,9 @@ class BottonContainer extends React.Component {
                 "description": videoObj.snippet.description
             }})
         }).then(res => res.json()).then(video => {
-            console.log("video Created",video)
-            console.log("currentUser", currentUser)
-
+           this.setState({
+               video: video
+           },()=>{
             fetch('http://localhost:4000/histories', {
                 method: 'POST',
                 headers: {
@@ -41,13 +43,33 @@ class BottonContainer extends React.Component {
             }).then(res => res.json()).then(history => {
                 this.setState({history},()=>console.log(this.state.history))
             })
+           })
         })
+    }
+
+    handleSubmit = (comment) => {
+       
+        // this.setState({
+        //     comments: [...this.state.comments, comment]
+        // })
+         
+            fetch("http://localhost:4000/comments", {
+                method: "POST",
+                headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+                },
+                body: JSON.stringify({comment:{
+                    "content": comment,
+                    "history_id": this.state.history.id
+                }})
+            }).then(res => res.json()).then(comment => this.setState({comments: [...this.state.comments, comment]}))
     }
 
     render(){
         return (
             <div id='botton-container'>
-                <VideoDetailContainer selected={this.state.selected} history={this.state.history}/>
+                <VideoDetailContainer comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>
                 <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
             </div>
     )}

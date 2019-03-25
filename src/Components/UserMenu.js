@@ -11,6 +11,7 @@ const LogoutButton = (props) => {
 
     return (
         <div id="user-menu">
+            {props.currentUser!=="" ? props.currentUser.user_name: null}
             <button id="history"><i className="fas fa-folder"></i></button>
             <button onClick={handleClick} id="logout">Log Out</button>
         </div>

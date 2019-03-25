@@ -39,9 +39,8 @@ class App extends Component {
   };
 
   handleSearchSubmit = (term) => {
-      console.log(term)
-      console.log(typeof API_KEY)
-      YTSearch({key: API_KEY, term: term}, videos => {
+      YTSearch({key: API_KEY, term: term, maxResults: 25}, videos => {
+        console.log(videos)
         this.setState({
               videos :videos,
             })
@@ -49,6 +48,7 @@ class App extends Component {
   }
 
   handleSignup = (userObj)=>{
+      if(userObj.password === userObj.comfirm_password){
       fetch("http://localhost:4000/users", {
         method: 'POST',
         headers: {
@@ -69,6 +69,7 @@ class App extends Component {
           this.props.history.push('/')
         })
       })
+    }
   }
 
   handleLogin = (user) => {

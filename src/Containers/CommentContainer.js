@@ -4,51 +4,36 @@ import InputComment from '../Components/InputComment'
 import '../style/video.css'
 
 class CommentContainer extends React.Component {
-    state ={
-        comments: []
-    }
+    // state ={
+    //     comments: []
+    // }
 
-    handleSubmit = (comment) => {
+    // handleSubmit = (comment) => {
        
-        this.setState({
-            comments: [...this.state.comments, comment]
-        }, () =>  console.log(this.props.history.id))
+    //     this.setState({
+    //         comments: [...this.state.comments, comment]
+    //     })
          
-        // console.log(this)
-            fetch("http://localhost:4000/comments", {
-                method: "POST",
-                headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-                },
-                body: JSON.stringify({comment:{
-                    "content": comment,
-                    "history_id": this.props.history.id
-                }})
-            }).then(res => res.json()).then(console.log)
-    }
-
-    // createComment=(comment)=>{
-    //     const histy_id =this.props.history.id
-    //     fetch("http://localhost:4000/comments",{
+    //     // console.log(this)
+    //         fetch("http://localhost:4000/comments", {
     //             method: "POST",
     //             headers: {
-    //             " content-type": "application/json",
+    //             "content-type": "application/json",
     //             accepts: "application/json"
     //             },
     //             body: JSON.stringify({comment:{
     //                 "content": comment,
-    //                 "history_id": histy_id
+    //                 "history_id": this.props.history.id
     //             }})
-    //         })
+    //         }).then(res => res.json()).then(console.log)
     // }
 
     render(){
         return (
             <div id='comment-container'>
                 <div id="comment-header">comment area</div>
-                <Comment comments={this.state.comments}/>
-                <InputComment handleSubmit={this.handleSubmit}/>
+                <Comment video={this.props.video} history={this.props.history} comments={this.props.comments}/>
+                <InputComment handleSubmit={this.props.handleSubmit}/>
             </div>
         )
     }
