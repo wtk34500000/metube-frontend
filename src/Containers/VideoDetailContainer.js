@@ -7,7 +7,7 @@ class VideoDetailContainer extends React.Component{
         return (
             <div className="video-detail-container">
                 <VideoDetail selected={this.props.selected}/>
-                <CommentContainer />
+                <CommentContainer history={this.props.history}/>
             </div>
         )
     }

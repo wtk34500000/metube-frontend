@@ -17,27 +17,26 @@ class App extends Component {
     loginError: false
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
     let token = localStorage.token;
 
-    token ?
-    fetch("http://localhost:4000/user", {
-      method: 'GET',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-         Authorization: `${token}`
-      }})
-    .then(resp => resp.json())
-          .then(user => {
-            this.setState({ user }, () => {
-              console.log(user);
+    token
+      ? fetch("http://localhost:4000/current_user", {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            accepts: "application/json",
+            Authorization: `${token}`
+          }
+        })
+          .then(resp => resp.json())
+          .then(currentUser => {
+            this.setState({ currentUser: currentUser.user }, () => {
               this.props.history.push("/");
             });
           })
-    :
-    this.props.history.push("/signup");
-  }
+      : this.props.history.push("/signup");
+  };
 
   handleSearchSubmit = (term) => {
       console.log(term)
@@ -47,7 +46,6 @@ class App extends Component {
               videos :videos,
             })
       })
-
   }
 
   handleSignup = (userObj)=>{
@@ -66,9 +64,9 @@ class App extends Component {
         }})
       }).then(res => res.json())
       .then(currentUser => {
-        this.setState({currentUser}, () => {
+        this.setState({currentUser: currentUser.user}, () => {
+          localStorage.setItem("token", currentUser.jwt);
           this.props.history.push('/')
-          localStorage.setItem("token", currentUser.id)
         })
       })
   }
@@ -76,23 +74,21 @@ class App extends Component {
   handleLogin = (user) => {
     this.setState({loginError:false})
     fetch("http://localhost:4000/login", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
+        "content-type": "application/json",
+        accepts: "application/json"
       },
-      body: JSON.stringify({user})
+      body: JSON.stringify({ user })
     })
-    .then(res => res.json())
-    .then(user => {
-            this.setState({ user }, () => {
-              console.log(user);
-              localStorage.setItem("token", user.id)
-              this.props.history.push("/");
-            });
-          })
-          .catch(error => { this.setState({loginError: true})})
-    }
+      .then(resp => resp.json())
+      .then(currentUser => {
+        this.setState({currentUser: currentUser.user}, () => {
+          this.props.history.push('/')
+          localStorage.setItem("token", currentUser.jwt)
+        })
+      })
+  }
 
   render() {
     return (
