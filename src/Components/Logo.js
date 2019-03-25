@@ -6,8 +6,8 @@ import '../style/header.css';
 
 const Logo = () => {
     return (
-        <div className="logo">
-        <img src={require("../img/logo.png")} alt="Logo" className="logo-img"/>
+        <div id="logo">
+          <img src={require("../img/logo.png")} alt="Logo" />
         </div>
     )
 }

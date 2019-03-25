@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -25,11 +26,6 @@
   /* border: 1px solid black */
 }
 
-.logo {
-  position: relative;
-  float: left;
-  margin-left: 2%;
-}
 
 .signup-button {
   position: relative;
@@ -56,17 +52,8 @@
 
 }
 
-.search-bar {
-  position: relative;
-  float: left;
-  margin-left: 25%;
-  margin-top: auto;
-  margin-bottom:auto;
- 
-}
-
-.botton-container {
-  margin: 10px;
+#botton-container {
+  margin-top: 100px;
   display: flex;
 }
 
@@ -87,7 +74,7 @@
   width: 30vw;
   height: 90vh;
   /* border: 2px solid black; */
-  
+
 }
 
 .video-list-container .video-item{
@@ -106,14 +93,6 @@
   margin: auto;
 }
 
-.comment-container {
-  margin: 20px;
-  width: 67vw;
-  height: 20vh;
-  border: 2px solid black;
-  overflow-y: auto;
-
-}
 
 .float-left{
   float:left;
@@ -124,5 +103,3 @@
   top: 0;
   bottom: 0;
 } */
-
-

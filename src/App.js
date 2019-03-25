@@ -7,18 +7,19 @@ import HomeContainer from './Containers/HomeContainer';
 import { withRouter } from "react-router-dom";
 import './App.css';
 
+
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
-    currentUser: '',
-    videos: []
- 
+    currentUser: " ",
+    videos: [],
+    loginError: false
   }
 
   componentDidMount = () => {
     let token = localStorage.token;
-    
+
     token
       ? fetch("http://localhost:4000/current_user", {
           method: "GET",
@@ -71,6 +72,7 @@ class App extends Component {
   }
 
   handleLogin = (user) => {
+    this.setState({loginError:false})
     fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
@@ -84,7 +86,6 @@ class App extends Component {
         this.setState({currentUser: currentUser.user}, () => {
           localStorage.setItem("token", currentUser.jwt)
           this.props.history.push('/')
-          
         })
       })
   }
@@ -92,8 +93,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      {console.log(this.state.currentUser)}
           <Switch>
-              <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
+              <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
               <Route path ='/' render={()=> <HomeContainer currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>

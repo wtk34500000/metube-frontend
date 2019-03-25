@@ -6,10 +6,9 @@ class HomeContainer extends React.Component {
 
     render(){
         return (
-            <div className="home-container">
+            <div id="home-container">
               <HeadContainer currentUser={this.props.currentUser} handleSearch={this.props.handleSearch}/>
-              <hr />
-              <BottonContainer videos={this.props.videos} currentUser={this.props.currentUser}/> 
+              <BottonContainer videos={this.props.videos} currentUser={this.props.currentUser}/>
             </div>
         )
     }

@@ -15,7 +15,7 @@ class LoginForm extends Component{
             [e.target.name]: e.target.value
         })
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.handleSubmit(this.state)
@@ -40,7 +40,11 @@ class LoginForm extends Component{
 
             <div className="Login">
             <form onSubmit={this.handleSubmit}>
-              <h1>Log in: </h1>
+              <h1>Log In: </h1>
+              {this.props.error ?
+              <p>Wrong email or password</p>
+            :
+            null}
               <FormGroup controlId="email">
                 <FormControl
                   autoFocus
@@ -72,7 +76,7 @@ class LoginForm extends Component{
 
         )
 
-        
+
     }
 }
 
