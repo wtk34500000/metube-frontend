@@ -82,8 +82,9 @@ class App extends Component {
       .then(resp => resp.json())
       .then(currentUser => {
         this.setState({currentUser: currentUser.user}, () => {
-          this.props.history.push('/')
           localStorage.setItem("token", currentUser.jwt)
+          this.props.history.push('/')
+          
         })
       })
   }
