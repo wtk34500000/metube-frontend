@@ -9,8 +9,8 @@ const LogoutButton = (props) => {
    } 
 
     return (
-        <div className="logout-button">
-            <p>Welcome: {props.currentUser.user_name} </p>
+        <div className="logout!-button">
+         <p>Welcome: {props.currentUser.user_name} </p>
             <button onClick={handleClick}>Log Out</button>
         </div>
     )

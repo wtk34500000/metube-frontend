@@ -11,15 +11,31 @@ const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
-    currentUser: " ",
+    currentUser: '',
     videos: []
+ 
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
     let token = localStorage.token;
-
-    token ? this.props.history.push('/') : this.props.history.push('/signup')
-  }
+    
+    token
+      ? fetch("http://localhost:4000/current_user", {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            accepts: "application/json",
+            Authorization: `${token}`
+          }
+        })
+          .then(resp => resp.json())
+          .then(currentUser => {
+            this.setState({ currentUser: currentUser.user }, () => {
+              this.props.history.push("/");
+            });
+          })
+      : this.props.history.push("/signup");
+  };
 
   handleSearchSubmit = (term) => {
       console.log(term)
@@ -29,7 +45,6 @@ class App extends Component {
               videos :videos,
             })
       })
-
   }
 
   handleSignup = (userObj)=>{
@@ -48,15 +63,29 @@ class App extends Component {
         }})
       }).then(res => res.json())
       .then(currentUser => {
-        this.setState({currentUser}, () => {
+        this.setState({currentUser: currentUser.user}, () => {
+          localStorage.setItem("token", currentUser.jwt);
           this.props.history.push('/')
-          localStorage.setItem("token", currentUser.id)
         })
       })
   }
 
-  handleLogin = (userObj) => {
-    console.log(userObj)
+  handleLogin = (user) => {
+    fetch("http://localhost:4000/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify({ user })
+    })
+      .then(resp => resp.json())
+      .then(currentUser => {
+        this.setState({currentUser: currentUser.user}, () => {
+          this.props.history.push('/')
+          localStorage.setItem("token", currentUser.jwt)
+        })
+      })
   }
 
   render() {

@@ -9,7 +9,7 @@ class HomeContainer extends React.Component {
             <div className="home-container">
               <HeadContainer currentUser={this.props.currentUser} handleSearch={this.props.handleSearch}/>
               <hr />
-              <BottonContainer videos={this.props.videos}/> 
+              <BottonContainer videos={this.props.videos} currentUser={this.props.currentUser}/> 
             </div>
         )
     }
