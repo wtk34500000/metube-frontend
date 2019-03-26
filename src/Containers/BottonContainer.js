@@ -8,6 +8,7 @@ import '../style/video.css'
 class BottonContainer extends React.Component {
     state = {
         selected : '',
+        selectedHisVideo: '',
         history: " ",
         video: " ",
         comments: []
@@ -72,6 +73,19 @@ class BottonContainer extends React.Component {
             }).then(res => res.json()).then(comment => this.setState({ comments: [...this.state.comments, comment]}))
     }
 
+    handleHisImgClick = (his) => {
+       const id=his.url.split('/')[his.url.split('/').length-1]
+        const video={
+            id:{videoId: id},
+            snippet:{description: his.description, title: his.title}
+        }
+
+       this.setState({
+            selected: video
+       },()=>this.props.history.push('/videos'))
+            
+    }
+
     render(){
         console.log("bottoncontainer", this.state.comments)
         return (
@@ -79,7 +93,7 @@ class BottonContainer extends React.Component {
             <Switch>
                 <Route path ='/videos' render={() => <VideoDetailContainer currentUser={this.props.currentUser} comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>} />
                 {/* {this.props.hisClicked? <History userHistories={this.props.userHistories}/>: <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } */}
-                <Route path ='/history' render={()=> <History userHistories={this.props.userHistories}/>}/>
+                <Route path ='/history' render={()=> <History handleHisImgClick={this.handleHisImgClick} userHistories={this.props.userHistories}/>}/>
                 <Route path='/' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
               </Switch>
 

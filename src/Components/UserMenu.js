@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 
 // *username*{props.currentUser.user_name}
-class LogoutButton extends React.Component {
+class UserMenu extends React.Component {
     state={
         userHistory: []
     }
@@ -28,6 +28,7 @@ class LogoutButton extends React.Component {
    }
 
    handleHisClick= () => {
+   
     this.props.history.push("/history")
     this.props.handleHisClick(this.state.userHistory)
        
@@ -43,4 +44,4 @@ class LogoutButton extends React.Component {
     )}
 }
 
-export default withRouter(LogoutButton);
+export default withRouter(UserMenu);

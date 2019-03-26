@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import VideoCard from '../Components/VideoCard'
+import { withRouter } from "react-router-dom";
 
 
 class History extends Component {
    
 
     render(){
-        const arrVideoCard= this.props.userHistories.map(his => {
+        const arrVideoCard= this.props.userHistories.map((his,idx) => {
             return (
-                <div className="video-card">
+                <div key={idx} className="video-card">
                     <div className="video-img">
-                        <img alt='pic' src={his.img_url}/>
+                        <img alt='pic' src={his.img_url} onClick={()=>this.props.handleHisImgClick(his)}/>
                     </div>
                     <div className="video-card-detail">
                          <p>{his.title}</p>
@@ -27,4 +27,4 @@ class History extends Component {
     }
 }
 
-export default History;
+export default withRouter(History);
