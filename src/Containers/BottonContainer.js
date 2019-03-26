@@ -54,7 +54,7 @@ class BottonContainer extends React.Component {
     }
 
     handleSubmit = (comment) => {
-       
+
         // this.setState({
         //     comments: [...this.state.comments, comment]
         // })
@@ -76,21 +76,14 @@ class BottonContainer extends React.Component {
         console.log("bottoncontainer", this.state.comments)
         return (
             <div id='bottom-container'>
-<<<<<<< HEAD
-            <switch>
-                <Route path ='/videos' render={() => <VideoDetailContainer currentUser={this.props.currentUser} selected={this.state.selected} history={this.state.history}/>} />
-              </switch>
-              <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
-=======
             <Switch>
-                <Route path ='/videos' render={() => <VideoDetailContainer comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>} />
+                <Route path ='/videos' render={() => <VideoDetailContainer currentUser={this.props.currentUser} comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>} />
                 {/* {this.props.hisClicked? <History userHistories={this.props.userHistories}/>: <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } */}
                 <Route path ='/history' render={()=> <History userHistories={this.props.userHistories}/>}/>
                 <Route path='/' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
-              </Switch>   
-                
-           
->>>>>>> wei
+              </Switch>
+
+
             </div>
     )}
 }

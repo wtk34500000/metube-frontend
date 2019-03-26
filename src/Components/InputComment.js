@@ -6,30 +6,6 @@ class InputComment extends React.Component {
         input: ''
     }
 
-<<<<<<< HEAD
-    // componentDidMount(){
-    //     const token = localStorage.token
-
-
-    //     fetch("http://localhost:4000/comments",{
-    //             method: "POST",
-    //             headers: {
-    //             " content-type": "application/json",
-    //             accepts: "application/json"
-    //             // Authorization: `${token}`
-    //             },
-    //             body: JSON.stringify({
-    //                 comment: {
-    //                 "content": this.state.input,
-    //                 "history_id": this.props.history.id
-    //                 }
-    //             })
-    //         }).then(res => res.json()).then(console.log)
-
-    // }
-
-=======
->>>>>>> wei
     handleChange=(e)=>{
       console.log(e.target.value)
         this.setState({
@@ -38,11 +14,7 @@ class InputComment extends React.Component {
     }
 
     handleSubmit = () => {
-<<<<<<< HEAD
       if(this.state.input.length > 0){
-=======
-        console.log( this.props)
->>>>>>> wei
         this.props.handleSubmit(this.state.input)
 
         this.setState({

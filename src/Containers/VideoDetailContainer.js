@@ -12,11 +12,7 @@ class VideoDetailContainer extends React.Component{
               : null
             }
                 <VideoDetail selected={this.props.selected}/>
-<<<<<<< HEAD
-                <CommentContainer currentUser={this.props.currentUser} history={this.props.history}/>
-=======
-                <CommentContainer video={this.props.video} history={this.props.history} comments={this.props.comments} handleSubmit={this.props.handleSubmit} history={this.props.history}/>
->>>>>>> wei
+                <CommentContainer video={this.props.video} currentUser={this.props.currentUser} history={this.props.history} comments={this.props.comments} handleSubmit={this.props.handleSubmit} history={this.props.history}/>
             </div>
         )
     }
