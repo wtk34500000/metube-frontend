@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Login from './Components/LoginForm';
 import Signup from './Components/SignupForm';
 import YTSearch from 'youtube-api-search';
 import HomeContainer from './Containers/HomeContainer';
-import { withRouter } from "react-router-dom";
 import './App.css';
 
 
@@ -12,7 +11,7 @@ const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
   state = {
-    currentUser: " ",
+    currentUser: "",
     videos: [],
     loginError: false
   }

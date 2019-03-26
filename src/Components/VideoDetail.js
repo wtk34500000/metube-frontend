@@ -7,19 +7,12 @@ const VideDetail = (props) => {
         }
         return (
             <div className='video-detail'>
-                <div className="center">
-                    {videoUrl!==''
-                    ? <iframe title={ props.selected.snippet.title } src={videoUrl} allow="autoplay; fullscreen" style={{width:"65vw", height:" 50vh"}}/> 
-                    : <h1>Loading...</h1>}
+                <div id="main-video">
+                    <iframe title={ props.selected.snippet.title } src={videoUrl} allow="autoplay; fullscreen" />
+                    <h2>{ props.selected.snippet.title }</h2>
                 </div>
                 <div className="center" style={{width: "65vw"}}>
-                    {videoUrl!==''
-                    ?  <h2>{ props.selected.snippet.title }</h2>
-                    : null}
-                    
-                    {videoUrl!==''
-                    ?  <p>{ props.selected.snippet.description }</p>
-                    : null}   
+                    <p>{ props.selected.snippet.description }</p>
                 </div>
             </div>
         )

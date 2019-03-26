@@ -1,6 +1,8 @@
 import React from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom';
 import VideoListContainer from '../Containers/VideoContainer'
 import VideoDetailContainer from '../Containers/VideoDetailContainer'
+import '../style/video.css'
 
 class BottonContainer extends React.Component {
     state = {
@@ -41,7 +43,7 @@ class BottonContainer extends React.Component {
                     "video_id": video.id
                 }})
             }).then(res => res.json()).then(history => {
-                this.setState({history},()=>console.log(this.state.history))
+                this.setState({history},()=>this.props.history.push(`/videos/${video.title}`))
             })
            })
         })
@@ -68,11 +70,19 @@ class BottonContainer extends React.Component {
 
     render(){
         return (
+<<<<<<< HEAD
             <div id='botton-container'>
                 <VideoDetailContainer comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>
                 <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
+=======
+            <div id='bottom-container'>
+            <switch>
+                <Route path ='/videos' render={() => <VideoDetailContainer selected={this.state.selected} history={this.state.history}/>} />
+              </switch>
+              <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
+>>>>>>> 781b2fe2d1e4df5b74db39aa7e7225e9e8b3e5f9
             </div>
     )}
 }
 
-export default BottonContainer;
+export default withRouter(BottonContainer);

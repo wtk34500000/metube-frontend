@@ -1,6 +1,7 @@
 import React from 'react'
 import HeadContainer from './HeadContainer'
 import BottonContainer from './BottonContainer'
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 class HomeContainer extends React.Component {
 
@@ -14,4 +15,4 @@ class HomeContainer extends React.Component {
     }
 }
 
-export default HomeContainer;
+export default withRouter(HomeContainer);
