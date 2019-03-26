@@ -9,25 +9,25 @@ class CommentContainer extends React.Component {
     // }
 
 
-    handleSubmit = (comment) => {
+    // handleSubmit = (comment) => {
 
-        this.setState({
-            comments: [...this.state.comments, comment]
-        }, () =>  console.log(this.props.history.id))
+    //     this.setState({
+    //         comments: [...this.state.comments, comment]
+    //     }, () =>  console.log(this.props.history.id))
 
-        // console.log(this)
-            fetch("http://localhost:4000/comments", {
-                method: "POST",
-                headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-                },
-                body: JSON.stringify({comment:{
-                    "content": comment,
-                    "history_id": this.props.history.id
-                }})
-            }).then(res => res.json()).then(console.log)
-    }
+    //     // console.log(this)
+    //         fetch("http://localhost:4000/comments", {
+    //             method: "POST",
+    //             headers: {
+    //             "content-type": "application/json",
+    //             accepts: "application/json"
+    //             },
+    //             body: JSON.stringify({comment:{
+    //                 "content": comment,
+    //                 "history_id": this.props.history.id
+    //             }})
+    //         }).then(res => res.json()).then(console.log)
+    // }
 
     // createComment=(comment)=>{
     //     const histy_id =this.props.history.id

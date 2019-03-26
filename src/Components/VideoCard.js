@@ -10,11 +10,11 @@ const VideoCard = (props) => {
 
 
     return (
-        <div className="video-item">
-            <div className="float-left">
+        <div className="video-card">
+            <div className="video-img">
                 <img alt='pic' src={props.videoId.snippet.thumbnails.medium.url} onClick={handleClick}/>
             </div>
-            <div className="float-left">
+            <div className="video-card-detail">
                  <p>{props.videoId.snippet.title}</p>
             </div>
             

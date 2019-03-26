@@ -13,7 +13,10 @@ class App extends Component {
   state = {
     currentUser: "",
     videos: [],
-    loginError: false
+    loginError: false,
+    userHistories:[],
+    hisClicked: false
+
   }
 
   componentDidMount = () => {
@@ -38,16 +41,16 @@ class App extends Component {
   };
 
   handleSearchSubmit = (term) => {
-      YTSearch({key: API_KEY, term: term, maxResults: 25}, videos => {
+      YTSearch({key: API_KEY, term: term, maxResults: 5}, videos => {
         console.log(videos)
         this.setState({
-              videos :videos,
+              videos :videos
             })
       })
   }
 
   handleSignup = (userObj)=>{
-      if(userObj.password === userObj.comfirm_password){
+     
       fetch("http://localhost:4000/users", {
         method: 'POST',
         headers: {
@@ -63,12 +66,14 @@ class App extends Component {
         }})
       }).then(res => res.json())
       .then(currentUser => {
+        console.log("return ",currentUser)
+
         this.setState({currentUser: currentUser.user}, () => {
           localStorage.setItem("token", currentUser.jwt);
           this.props.history.push('/')
         })
       })
-    }
+    
   }
 
   handleLogin = (user) => {
@@ -90,14 +95,21 @@ class App extends Component {
       })
   }
 
+  handleHisClick = (historiesArr) =>{
+    console.log('inside appjs',historiesArr)
+    this.setState({
+      hisClicked: !this.state.hisClicked,
+      userHistories: historiesArr
+    })
+  }
+
   render() {
     return (
       <div className="App">
-      {console.log(this.state.currentUser)}
           <Switch>
               <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/' render={()=> <HomeContainer currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+              <Route path ='/' render={()=> <HomeContainer hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );

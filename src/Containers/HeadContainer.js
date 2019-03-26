@@ -13,7 +13,7 @@ const HeadContainer = (props) => {
         <SearchBar handleSearch={props.handleSearch}/>
        {/* { !localStorage.token ? <SignupButton /> : null}
        { !localStorage.token ? <LoginButton /> : null} */}
-       { localStorage.token ? <UserMenu currentUser={props.currentUser}/> :null}
+       { localStorage.token ? <UserMenu handleHisClick={props.handleHisClick} currentUser={props.currentUser}/> :null}
        </div>
     )
 }

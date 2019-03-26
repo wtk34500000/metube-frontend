@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import VideoListContainer from '../Containers/VideoContainer'
 import VideoDetailContainer from '../Containers/VideoDetailContainer'
+import History from '../Components/History'
 import '../style/video.css'
 
 class BottonContainer extends React.Component {
@@ -13,6 +14,8 @@ class BottonContainer extends React.Component {
     }
 
     handleSelectVideo = (videoObj, currentUser) => {
+        console.log("videoobj", videoObj)
+            console.log("img url", videoObj.snippet.thumbnails.medium.url)
             this.setState({
                 selected: videoObj
             })
@@ -26,7 +29,8 @@ class BottonContainer extends React.Component {
             body: JSON.stringify({video:{
                 "title": videoObj.snippet.title,
                 "url": `https://www.youtube.com/embed/${videoObj.id.videoId}`,
-                "description": videoObj.snippet.description
+                "description": videoObj.snippet.description,
+                "img_url": videoObj.snippet.thumbnails.medium.url
             }})
         }).then(res => res.json()).then(video => {
            this.setState({
@@ -54,7 +58,7 @@ class BottonContainer extends React.Component {
         // this.setState({
         //     comments: [...this.state.comments, comment]
         // })
-         
+         console.log("handlesubmit", comment)
             fetch("http://localhost:4000/comments", {
                 method: "POST",
                 headers: {
@@ -65,22 +69,21 @@ class BottonContainer extends React.Component {
                     "content": comment,
                     "history_id": this.state.history.id
                 }})
-            }).then(res => res.json()).then(comment => this.setState({comments: [...this.state.comments, comment]}))
+            }).then(res => res.json()).then(comment => this.setState({ comments: [...this.state.comments, comment]}))
     }
 
     render(){
+        console.log("bottoncontainer", this.state.comments)
         return (
-<<<<<<< HEAD
-            <div id='botton-container'>
-                <VideoDetailContainer comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>
-                <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
-=======
             <div id='bottom-container'>
-            <switch>
-                <Route path ='/videos' render={() => <VideoDetailContainer selected={this.state.selected} history={this.state.history}/>} />
-              </switch>
-              <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
->>>>>>> 781b2fe2d1e4df5b74db39aa7e7225e9e8b3e5f9
+            <Switch>
+                <Route path ='/videos' render={() => <VideoDetailContainer comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} history={this.state.history}/>} />
+                {/* {this.props.hisClicked? <History userHistories={this.props.userHistories}/>: <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } */}
+                <Route path ='/history' render={()=> <History userHistories={this.props.userHistories}/>}/>
+                <Route path='/' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
+              </Switch>   
+                
+           
             </div>
     )}
 }

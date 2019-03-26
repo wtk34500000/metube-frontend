@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 class VideoContainer extends React.Component{
     render(){
-        const arrOfVideosId = this.props.videos.map(video => <VideoCard currentUser={this.props.currentUser} handleSelectVideo={this.props.handleSelectVideo} key={video.id.videoId} videoId={video}/>)
+        const arrOfVideosId = this.props.videos.map(video => <VideoCard  currentUser={this.props.currentUser} handleSelectVideo={this.props.handleSelectVideo} key={video.id.videoId} videoId={video}/>)
         return (
             <div id="video-list-container">
                 {arrOfVideosId}
