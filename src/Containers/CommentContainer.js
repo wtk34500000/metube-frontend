@@ -47,8 +47,8 @@ class CommentContainer extends React.Component {
         return (
             <div id='comment-container'>
                 <div id="comment-header">Comments</div>
+                <InputComment currentUser={this.props.currentUser} handleSubmit={this.handleSubmit}/>
                 <Comment comments={this.state.comments}/>
-                <InputComment handleSubmit={this.handleSubmit}/>
             </div>
         )
     }

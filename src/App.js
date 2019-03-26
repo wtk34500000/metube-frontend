@@ -38,13 +38,15 @@ class App extends Component {
   };
 
   handleSearchSubmit = (term) => {
-      console.log(term)
+    if(term.length > 0){
       console.log(typeof API_KEY)
       YTSearch({key: API_KEY, term: term}, videos => {
         this.setState({
               videos :videos,
             })
       })
+      this.props.history.push("/");
+    }
   }
 
   handleSignup = (userObj)=>{

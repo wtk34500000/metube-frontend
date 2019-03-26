@@ -50,7 +50,7 @@ class BottonContainer extends React.Component {
         return (
             <div id='bottom-container'>
             <switch>
-                <Route path ='/videos' render={() => <VideoDetailContainer selected={this.state.selected} history={this.state.history}/>} />
+                <Route path ='/videos' render={() => <VideoDetailContainer currentUser={this.props.currentUser} selected={this.state.selected} history={this.state.history}/>} />
               </switch>
               <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>
             </div>

@@ -7,8 +7,12 @@ class VideoDetailContainer extends React.Component{
     render(){
         return (
             <div id="video-detail-container">
+            {!this.props.selected ?
+              this.props.history.push("/")
+              : null
+            }
                 <VideoDetail selected={this.props.selected}/>
-                <CommentContainer history={this.props.history}/>
+                <CommentContainer currentUser={this.props.currentUser} history={this.props.history}/>
             </div>
         )
     }
