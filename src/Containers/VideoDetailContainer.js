@@ -12,7 +12,8 @@ class VideoDetailContainer extends React.Component{
               : null
             }
                 <VideoDetail selected={this.props.selected}/>
-                <CommentContainer video={this.props.video} currentUser={this.props.currentUser} history={this.props.history} comments={this.props.comments} handleSubmit={this.props.handleSubmit} history={this.props.history}/>
+                {console.log("this is the video:", this.props.video)}
+                <CommentContainer video={this.props.video} currentUser={this.props.currentUser} histories={this.props.histories} comments={this.props.comments} handleSubmit={this.props.handleSubmit} />
             </div>
         )
     }
