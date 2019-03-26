@@ -28,6 +28,7 @@ class UserMenu extends React.Component {
    }
 
    handleHisClick= () => {
+   
     this.props.history.push("/history")
     this.props.handleHisClick(this.state.userHistory)
 
