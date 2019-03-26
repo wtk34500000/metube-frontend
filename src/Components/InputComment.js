@@ -6,6 +6,7 @@ class InputComment extends React.Component {
         input: ''
     }
 
+<<<<<<< HEAD
     // componentDidMount(){
     //     const token = localStorage.token
 
@@ -27,6 +28,8 @@ class InputComment extends React.Component {
 
     // }
 
+=======
+>>>>>>> wei
     handleChange=(e)=>{
       console.log(e.target.value)
         this.setState({
@@ -35,7 +38,11 @@ class InputComment extends React.Component {
     }
 
     handleSubmit = () => {
+<<<<<<< HEAD
       if(this.state.input.length > 0){
+=======
+        console.log( this.props)
+>>>>>>> wei
         this.props.handleSubmit(this.state.input)
 
         this.setState({
