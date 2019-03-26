@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 
 // *username*{props.currentUser.user_name}
-class LogoutButton extends React.Component {
+class UserMenu extends React.Component {
     state={
         userHistory: []
     }
@@ -24,23 +24,23 @@ class LogoutButton extends React.Component {
                   }
                 })
             })
-      })  
+      })
    }
 
    handleHisClick= () => {
     this.props.history.push("/history")
     this.props.handleHisClick(this.state.userHistory)
-       
+
    }
 
  render(){
     return (
         <div id="user-menu">
-            {this.props.currentUser!=="" ? this.props.currentUser.user_name: null}
+            <text>{this.props.currentUser!=="" ? this.props.currentUser.user_name: null}</text>
             <button onClick ={this.handleHisClick} id="history"><i className="fas fa-folder"></i></button>
             <button onClick={this.handleClick} id="logout">Log Out</button>
         </div>
     )}
 }
 
-export default withRouter(LogoutButton);
+export default withRouter(UserMenu);

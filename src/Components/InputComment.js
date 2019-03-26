@@ -3,11 +3,11 @@ import img from '../img/user.png'
 
 class InputComment extends React.Component {
     state = {
-        input: ''
+        input: '',
+        reset: false
     }
 
     handleChange=(e)=>{
-      console.log(e.target.value)
         this.setState({
             input: e.target.value
         })
@@ -31,7 +31,7 @@ class InputComment extends React.Component {
         return (
             <div id="input-comment">
             <img src={img} />
-            <textarea name="message" rows="1" cols="30" onChange={this.handleChange} value={this.state.input} placeHolder={this.props.currentUser.user_name}></textarea>
+            <textarea name="message" rows={Math.round(this.state.input.length) > 35 ? Math.round(this.state.input.length/35): "1"} cols="30" onChange={this.handleChange} value={this.state.input} placeHolder={this.props.currentUser.user_name}></textarea>
             <button id={this.state.input.length > 0 ? "can-submit":"cannot-submit"} onClick={this.handleSubmit}>Submit</button>
             </div>
     )}

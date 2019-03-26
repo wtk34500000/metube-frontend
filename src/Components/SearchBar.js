@@ -13,14 +13,18 @@ class SearchBar extends React.Component{
     }
 
     handleClick = () =>{
+      if(this.state.input.length > 0){
         this.props.history.push('/')
-        this.props.handleSearch(this.state.input)
+        let input = this.state.input;
+        this.setState({input: ""})
+        this.props.handleSearch(input)
+      }
     }
 
         render(){
             return (
                 <div id="search-bar">
-                    <input placeholder="Search" type="text" name="input" value={this.state.searchTerm} onChange={this.handleSearch} />
+                    <input placeholder="Search" type="text" name="input" value={this.state.input} onChange={this.handleSearch} />
                     <button onClick={this.handleClick} ><i className="fas fa-search"></i></button>
                 </div>
         )}

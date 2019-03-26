@@ -71,6 +71,10 @@ width: 15%;
   margin-left: 20px;
   margin-left: auto;
 }
+#user-menu text{
+  font-size: 15px;
+  margin-right: 20px;
+}
 #user-menu button{
   width: 100px;
   background: rgba(250, 250, 250, 1) !important;
