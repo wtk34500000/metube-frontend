@@ -1,15 +1,16 @@
 import React from 'react'
 import VideoCard from '../Components/VideoCard'
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 class VideoContainer extends React.Component{
     render(){
         const arrOfVideosId = this.props.videos.map(video => <VideoCard currentUser={this.props.currentUser} handleSelectVideo={this.props.handleSelectVideo} key={video.id.videoId} videoId={video}/>)
         return (
-            <div className="video-list-container" id="leftCol">
+            <div id="video-list-container">
                 {arrOfVideosId}
             </div>
         )
     }
 }
 
-export default VideoContainer;
+export default withRouter(VideoContainer);

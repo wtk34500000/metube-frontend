@@ -9,11 +9,11 @@ class CommentContainer extends React.Component {
     }
 
     handleSubmit = (comment) => {
-       
+
         this.setState({
             comments: [...this.state.comments, comment]
         }, () =>  console.log(this.props.history.id))
-         
+
         // console.log(this)
             fetch("http://localhost:4000/comments", {
                 method: "POST",
@@ -46,7 +46,7 @@ class CommentContainer extends React.Component {
     render(){
         return (
             <div id='comment-container'>
-                <div id="comment-header">comment area</div>
+                <div id="comment-header">Comments</div>
                 <Comment comments={this.state.comments}/>
                 <InputComment handleSubmit={this.handleSubmit}/>
             </div>
