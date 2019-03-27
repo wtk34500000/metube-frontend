@@ -28,15 +28,15 @@ class SignupForm extends Component{
     
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleSubmit(this.state)
-        this.setState({
-            email: '',
-            password:'',
-            first_name: '',
-            last_name: '',
-            user_name: '',
-            confirm_password: ''
-        })
+            this.props.handleSubmit(this.state)
+            this.setState({
+                email: '',
+                password:'',
+                first_name: '',
+                last_name: '',
+                user_name: '',
+                confirm_password: ''
+            })
     }
 
     handleClick = () => {

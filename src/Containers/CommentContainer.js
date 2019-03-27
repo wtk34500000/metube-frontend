@@ -7,7 +7,9 @@ class CommentContainer extends React.Component {
     state ={
         comments: []
     }
+    
     handleSubmit = (comment) => {
+        console.log("create comment", this.props)
             fetch("http://localhost:4000/comments", {
                 method: "POST",
                 headers: {
@@ -19,7 +21,10 @@ class CommentContainer extends React.Component {
                     "history_id": this.props.histories.id,
                     "user_name": this.props.currentUser.user_name
                 }})
-            }).then(res => res.json()).then(comment => {this.setState({ comments: [...this.state.comments, comment]})})
+            }).then(res => res.json()).then(comment => {
+                console.log('return comment', comment)
+                this.setState({ comments: [...this.state.comments, comment]
+                })})
     }
 
     componentDidMount(){

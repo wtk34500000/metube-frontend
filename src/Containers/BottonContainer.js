@@ -51,10 +51,10 @@ class BottonContainer extends React.Component {
     }
 
 
-
     handleHisImgClick = (his) => {
         fetch("http://localhost:4000/videos").then(res => res.json()).then(videos => {
             videos.find(video => {
+              
                 if(video.url===his.url){
                     const id=his.url.split('/')[his.url.split('/').length-1]
                     const videoObj={
@@ -63,7 +63,8 @@ class BottonContainer extends React.Component {
                     }
                    this.setState({
                         video: video,
-                        selected: videoObj
+                        selected: videoObj,
+                        histories: video.histories[0]
                    },()=>this.props.history.push('/videos'))
                     // this.setState({
                     //     video: video
