@@ -5,11 +5,11 @@ import '../style/video.css'
 
 class CommentContainer extends React.Component {
     state ={
-        comments: []
+        comments: [],
+        video: ""
     }
-    
+
     handleSubmit = (comment) => {
-        console.log("create comment", this.props)
             fetch("http://localhost:4000/comments", {
                 method: "POST",
                 headers: {
@@ -22,19 +22,27 @@ class CommentContainer extends React.Component {
                     "user_name": this.props.currentUser.user_name
                 }})
             }).then(res => res.json()).then(comment => {
-                console.log('return comment', comment)
+                console.log('return comment', comment);
                 this.setState({ comments: [...this.state.comments, comment]
                 })})
     }
 
     componentDidMount(){
-      this.setState({comments: this.props.video.comments})
+      this.update()
     }
+    update = () => {
+      console.log("done")
+      this.setState({comments: this.props.video.comments,
+      video: this.props.video})
 
+    }
+    componentDidUpdate(){
+      if(this.props.video !== this.state.video){
+        this.update()}
+    }
     render(){
         return (
             <div id='comment-container'>
-
                 <div id="comment-header">Comments</div>
                 <InputComment currentUser={this.props.currentUser} handleSubmit={this.handleSubmit}/>
                 <Comment comments={this.state.comments} />

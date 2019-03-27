@@ -9,8 +9,8 @@ const HeadContainer = (props) => {
     return (
        <div id="head-container">
         <Logo />
-        <SearchBar handleSearch={props.handleSearch}/>
-  
+        <SearchBar handleSearch={props.handleSearch} handleReset={props.handleReset}/>
+
        { localStorage.token ? <UserMenu handleHisClick={props.handleHisClick} currentUser={props.currentUser}/> :null}
        </div>
     )

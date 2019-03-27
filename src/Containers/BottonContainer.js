@@ -4,6 +4,7 @@ import VideoListContainer from '../Containers/VideoContainer'
 import VideoDetailContainer from '../Containers/VideoDetailContainer'
 import History from '../Components/History'
 import '../style/video.css'
+import DefaultShowPage from '../Components/DefaultShowPage'
 
 class BottonContainer extends React.Component {
     state = {
@@ -54,7 +55,7 @@ class BottonContainer extends React.Component {
     handleHisImgClick = (his) => {
         fetch("http://localhost:4000/videos").then(res => res.json()).then(videos => {
             videos.find(video => {
-              
+
                 if(video.url===his.url){
                     const id=his.url.split('/')[his.url.split('/').length-1]
                     const videoObj={
@@ -66,14 +67,11 @@ class BottonContainer extends React.Component {
                         selected: videoObj,
                         histories: video.histories[0]
                    },()=>this.props.history.push('/videos'))
-                    // this.setState({
-                    //     video: video
-                    // })
                 }
             })
         })
 
-       
+
 
     }
 
@@ -81,12 +79,17 @@ class BottonContainer extends React.Component {
         return (
             <div id='bottom-container'>
             <Switch>
-                <Route path ='/videos' render={() => <VideoDetailContainer video={this.state.video} currentUser={this.props.currentUser} comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} histories={this.state.histories}/>} />
-                {/* {this.props.hisClicked? <History userHistories={this.props.userHistories}/>: <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } */}
+                <Route path ='/videos' render={() =>
+                  <div>
+                  <VideoDetailContainer video={this.state.video} currentUser={this.props.currentUser} comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} histories={this.state.histories}/>
+                  <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo} />
+                  </div>
+                
+                } />
                 <Route path ='/history' render={()=> <History handleHisImgClick={this.handleHisImgClick} userHistories={this.props.userHistories}/>}/>
-                <Route path='/' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
+                <Route path='/search' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
+                <Route path='/' render={()=><DefaultShowPage currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
               </Switch>
-              {/* <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>  */}
             </div>
     )}
 }
