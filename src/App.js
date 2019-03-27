@@ -10,19 +10,24 @@ import './App.css';
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
-  state = {
-    currentUser: "",
-    videos: [],
-    loginError: false,
-    userHistories: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentUser: "",
+      videos: [],
+      loginError: false,
+      userHistories: []
+    }
+    this.myRef = React.createRef()
+}
 
-  }
 
   componentDidMount = () => {
     let token = localStorage.token;
+    this.handleReset()
 
-    token
-      ? fetch("http://localhost:4000/current_user", {
+    token ?
+      fetch("http://localhost:4000/current_user", {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -46,7 +51,7 @@ class App extends Component {
               videos :videos
             })
       })
-      this.props.history.push("/");
+      this.props.history.push(`/search/${term}`);
     }
     }
 
@@ -103,6 +108,13 @@ class App extends Component {
       userHistories: historiesArr
     })
   }
+  handleReset = () => {
+    YTSearch({key: API_KEY, term: "", maxResults: 25}, videos => {
+     this.setState({
+       videos :videos
+     })
+   });
+  }
 
   render() {
     return (
@@ -110,7 +122,7 @@ class App extends Component {
           <Switch>
               <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/' render={()=> <HomeContainer hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+              <Route path ='/' render={()=> <HomeContainer myRef={this.myRef} handleReset={this.handleReset} hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );

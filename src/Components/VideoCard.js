@@ -15,9 +15,10 @@ const VideoCard = (props) => {
                 <img alt='pic' src={props.videoId.snippet.thumbnails.medium.url} onClick={handleClick}/>
             </div>
             <div className="video-card-detail">
-                 <p>{props.videoId.snippet.title}</p>
+            <a>{props.videoId.snippet.title}</a>
+                 <p>{props.videoId.snippet.description}</p>
             </div>
-            
+
         </div>
     )
 }

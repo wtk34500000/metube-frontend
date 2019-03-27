@@ -21,9 +21,14 @@ class SearchBar extends React.Component{
       }
     }
 
+
         render(){
             return (
                 <div id="search-bar">
+                {this.props.history.location.pathname==="/" ?
+                  this.props.handleReset() :
+                  null
+              }
                     <input placeholder="Search" type="text" name="input" value={this.state.input} onChange={this.handleSearch} />
                     <button onClick={this.handleClick} ><i className="fas fa-search"></i></button>
                 </div>
