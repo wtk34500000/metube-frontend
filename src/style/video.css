@@ -17,6 +17,7 @@
   padding-top: 10px;
   padding-left: 40px;
   padding-right: 40px;
+  white-space: pre-line;
 }
 
 .video-card-detail a{
@@ -28,6 +29,7 @@
   color: rgb(180, 180, 180);
   font-size: 12px;
   margin-bottom: 5px;
+  white-space: pre-line;
 }
 #comments{
   width: 100%;
@@ -40,13 +42,17 @@
   max-height: 70vh;
   padding-right: 15px;
   padding-left: 15px;
+  height: inherit;
 }
 #comment-container{
+  overflow-y: hidden;
   color: black;
-  max-height: 80vh;
+  max-height: 79vh;
   width: 30%;
   margin-top: 10px;
   padding-left: 20px;
+  display: grid;
+  grid-template-rows: 40px;
 }
 #comment-header{
   font-size: 20px;
@@ -80,6 +86,7 @@
   display: flex;
   /* border: 2px solid black; */
   height: 90vh;
+  min-width: 1500px;
 }
 #video-list-container{
   position: relative;
@@ -90,6 +97,9 @@
   margin-right: -10px;
   padding-bottom: 0px;
   width: 1200px;
+  border-bottom: solid;
+  border-color: rgb(150, 150, 150);
+  border-width: thin;
 }
 #main-video iframe{
   border: 0px;
@@ -149,6 +159,7 @@
 #video-detail{
   text-align: left;
   height: 85vh;
+
 }
 #video-detail h2{
   font-size: 25px;
