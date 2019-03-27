@@ -14,6 +14,8 @@ class BottonContainer extends React.Component {
     }
 
     handleSelectVideo = (videoObj, currentUser) => {
+      this.props.myRef.current.scrollTo(0, 0);
+      console.log("myRef:::::::::", this.props.myRef)
             this.setState({
                 selected: videoObj
             })
@@ -84,7 +86,7 @@ class BottonContainer extends React.Component {
                   <VideoDetailContainer video={this.state.video} currentUser={this.props.currentUser} comments={this.state.comments} handleSubmit={this.handleSubmit} selected={this.state.selected} histories={this.state.histories}/>
                   <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo} />
                   </div>
-                
+
                 } />
                 <Route path ='/history' render={()=> <History handleHisImgClick={this.handleHisImgClick} userHistories={this.props.userHistories}/>}/>
                 <Route path='/search' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />

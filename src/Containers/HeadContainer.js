@@ -8,6 +8,7 @@ const HeadContainer = (props) => {
 
     return (
        <div id="head-container">
+       <div ref={props.myRef}></div>
         <Logo />
         <SearchBar handleSearch={props.handleSearch} handleReset={props.handleReset}/>
 

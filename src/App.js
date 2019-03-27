@@ -10,13 +10,17 @@ import './App.css';
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
-  state = {
-    currentUser: "",
-    videos: [],
-    loginError: false,
-    userHistories: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentUser: "",
+      videos: [],
+      loginError: false,
+      userHistories: []
+    }
+    this.myRef = React.createRef()
+}
 
-  }
 
   componentDidMount = () => {
     let token = localStorage.token;
@@ -118,7 +122,7 @@ class App extends Component {
           <Switch>
               <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/' render={()=> <HomeContainer handleReset={this.handleReset} hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+              <Route path ='/' render={()=> <HomeContainer myRef={this.myRef} handleReset={this.handleReset} hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );
