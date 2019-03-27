@@ -1,7 +1,7 @@
 import React from 'react'
 import HeadContainer from './HeadContainer'
 import BottonContainer from './BottonContainer'
-import { Route, Switch, withRouter } from 'react-router-dom';
+import {withRouter } from 'react-router-dom';
 
 class HomeContainer extends React.Component {
 

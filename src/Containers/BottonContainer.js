@@ -53,15 +53,26 @@ class BottonContainer extends React.Component {
 
 
     handleHisImgClick = (his) => {
-       const id=his.url.split('/')[his.url.split('/').length-1]
-        const video={
-            id:{videoId: id},
-            snippet:{description: his.description, title: his.title}
-        }
+        fetch("http://localhost:4000/videos").then(res => res.json()).then(videos => {
+            videos.find(video => {
+                if(video.url===his.url){
+                    const id=his.url.split('/')[his.url.split('/').length-1]
+                    const videoObj={
+                        id:{videoId: id},
+                        snippet:{description: his.description, title: his.title}
+                    }
+                   this.setState({
+                        video: video,
+                        selected: videoObj
+                   },()=>this.props.history.push('/videos'))
+                    // this.setState({
+                    //     video: video
+                    // })
+                }
+            })
+        })
 
-       this.setState({
-            selected: video
-       },()=>this.props.history.push('/videos'))
+       
 
     }
 
@@ -74,6 +85,7 @@ class BottonContainer extends React.Component {
                 <Route path ='/history' render={()=> <History handleHisImgClick={this.handleHisImgClick} userHistories={this.props.userHistories}/>}/>
                 <Route path='/' render={()=><VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/> } />
               </Switch>
+              {/* <VideoListContainer currentUser={this.props.currentUser} videos={this.props.videos} handleSelectVideo={this.handleSelectVideo}/>  */}
             </div>
     )}
 }

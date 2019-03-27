@@ -19,11 +19,13 @@ class CommentContainer extends React.Component {
                     "history_id": this.props.histories.id,
                     "user_name": this.props.currentUser.user_name
                 }})
-            }).then(res => res.json()).then(comment => {console.log(comment); this.setState({ comments: [...this.state.comments, comment]})})
+            }).then(res => res.json()).then(comment => {this.setState({ comments: [...this.state.comments, comment]})})
     }
+
     componentDidMount(){
       this.setState({comments: this.props.video.comments})
     }
+
     render(){
         return (
             <div id='comment-container'>

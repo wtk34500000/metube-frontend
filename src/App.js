@@ -14,7 +14,7 @@ class App extends Component {
     currentUser: "",
     videos: [],
     loginError: false,
-    hisClicked: false
+    userHistories: []
 
   }
 
@@ -42,7 +42,6 @@ class App extends Component {
   handleSearchSubmit = (term) => {
     if(term.length > 0){
       YTSearch({key: API_KEY, term: term, maxResults: 5}, videos => {
-        console.log(videos)
         this.setState({
               videos :videos
             })

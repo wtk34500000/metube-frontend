@@ -12,7 +12,6 @@ const VideDetail = (props) => {
             <div id='video-detail'>
                     <iframe title={ props.selected.snippet.title } src={videoUrl} allow="autoplay; fullscreen" />
                     <h2>{ props.selected.snippet.title }</h2>
-                    {console.log(props.selected)}
                 </div>
                 <div id="video-info" style={{width: "65vw"}}>
                 <h3>{props.selected.snippet.channelTitle}</h3>

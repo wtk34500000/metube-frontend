@@ -6,7 +6,9 @@ class History extends Component {
    
 
     render(){
+        // console.log('Inisde history',this.props.userHistories)
         const arrVideoCard= this.props.userHistories.map((his,idx) => {
+            console.log(his)
             return (
                 <div key={idx} className="video-card">
                     <div className="video-img">

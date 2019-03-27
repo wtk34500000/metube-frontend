@@ -1,6 +1,6 @@
 import React from 'react'
 import VideoCard from '../Components/VideoCard'
-import { Route, Switch, withRouter } from 'react-router-dom';
+import {withRouter } from 'react-router-dom';
 
 class VideoContainer extends React.Component{
     render(){
