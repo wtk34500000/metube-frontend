@@ -41,7 +41,7 @@ class App extends Component {
 
   handleSearchSubmit = (term) => {
     if(term.length > 0){
-      YTSearch({key: API_KEY, term: term, maxResults: 25}, videos => {
+      YTSearch({key: API_KEY, term: term, maxResults: 5}, videos => {
         this.setState({
               videos :videos
             })
