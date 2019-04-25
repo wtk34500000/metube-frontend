@@ -15,7 +15,7 @@ class UserMenu extends React.Component {
    }
 
     componentDidMount() {
-      fetch("http://localhost:4000/videos").then(res => res.json()).then( videos => {
+      fetch("https://metube-backend.herokuapp.com/videos").then(res => res.json()).then( videos => {
          videos.forEach(video => {
                video.histories.forEach(his => {
                   if(his.user_id === this.props.currentUser.id){

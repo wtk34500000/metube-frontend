@@ -10,7 +10,7 @@ class CommentContainer extends React.Component {
     }
 
     handleSubmit = (comment) => {
-            fetch("http://localhost:4000/comments", {
+            fetch("https://metube-backend.herokuapp.com/comments", {
                 method: "POST",
                 headers: {
                 "content-type": "application/json",

@@ -15,12 +15,11 @@ class BottonContainer extends React.Component {
 
     handleSelectVideo = (videoObj, currentUser) => {
       this.props.myRef.current.scrollTo(0, 0);
-      console.log("myRef:::::::::", this.props.myRef)
             this.setState({
                 selected: videoObj
             })
 
-            fetch("http://localhost:4000/videos", {
+            fetch("https://metube-backend.herokuapp.com/videos", {
             method : 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -36,7 +35,7 @@ class BottonContainer extends React.Component {
            this.setState({
                video: video
            },()=>{
-            fetch('http://localhost:4000/histories', {
+            fetch('https://metube-backend.herokuapp.com/histories', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -55,7 +54,7 @@ class BottonContainer extends React.Component {
 
 
     handleHisImgClick = (his) => {
-        fetch("http://localhost:4000/videos").then(res => res.json()).then(videos => {
+        fetch("https://metube-backend.herokuapp.com/videos").then(res => res.json()).then(videos => {
             videos.find(video => {
 
                 if(video.url===his.url){
