@@ -1,10 +1,11 @@
 import React from 'react'
+import {withRouter } from 'react-router-dom';
 
 class SearchBar extends React.Component{
     state={
         input:""
     }
-    
+
     handleSearch = (e) => {
             this.setState({
                 input:e.target.value
@@ -12,18 +13,27 @@ class SearchBar extends React.Component{
     }
 
     handleClick = () =>{
-        console.log(this.props)
-        this.props.handleSearch(this.state.input)
+      if(this.state.input.length > 0){
+        this.props.history.push('/')
+        let input = this.state.input;
+        this.setState({input: ""})
+        this.props.handleSearch(input)
+      }
     }
+
 
         render(){
             return (
-                <div className="search-bar">
-                    Search: <input type="text" name="input" value={this.state.searchTerm} onChange={this.handleSearch} />
-                    <button onClick={this.handleClick}>Search</button>
+                <div id="search-bar">
+                {this.props.history.location.pathname==="/" ?
+                  this.props.handleReset() :
+                  null
+              }
+                    <input placeholder="Search" type="text" name="input" value={this.state.input} onChange={this.handleSearch} />
+                    <button onClick={this.handleClick} ><i className="fas fa-search"></i></button>
                 </div>
         )}
-    
+
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

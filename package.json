@@ -3,13 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@angular/core": "^5.2.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.17",
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "bootstrap": "^4.3.1",
     "dotenv": "^7.0.0",
-    "react": "^16.8.4",
+    "i": "^0.3.6",
+    "jquery": "^1.9.1",
+    "npm": "^6.9.0",
+    "react": "^16.8.5",
+    "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "rxjs": "^5.5.12",
+    "typescript": "^3.3.4000",
     "youtube-api-search": "0.0.5",
-    "yt-search": "^0.4.1"
+    "yt-search": "^0.4.1",
+    "zone.js": "^0.8.29"
   },
   "scripts": {
     "start": "react-scripts start",

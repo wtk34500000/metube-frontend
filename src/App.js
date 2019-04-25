@@ -1,35 +1,62 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
-import Login from './Components/LoginForm'
-import Signup from './Components/SignupForm'
-import YTSearch from 'youtube-api-search'
-import HomeContainer from './Containers/HomeContainer'
+import { Route, Switch, withRouter } from 'react-router-dom';
+import Login from './Components/LoginForm';
+import Signup from './Components/SignupForm';
+import YTSearch from 'youtube-api-search';
+import HomeContainer from './Containers/HomeContainer';
 import './App.css';
-
-
 
 
 const API_KEY=process.env.REACT_APP_KEY
 
 class App extends Component {
-  state = {
-    currentUser: {},
-    videos: []
-    
-  }
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentUser: "",
+      videos: [],
+      loginError: false,
+      userHistories: []
+    }
+    this.myRef = React.createRef()
+}
+
+
+  componentDidMount = () => {
+    let token = localStorage.token;
+    this.handleReset()
+
+    token ?
+      fetch("http://localhost:4000/current_user", {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            accepts: "application/json",
+            Authorization: `${token}`
+          }
+        })
+          .then(resp => resp.json())
+          .then(currentUser => {
+            this.setState({ currentUser: currentUser.user }, () => {
+              this.props.history.push("/");
+            });
+          })
+      : this.props.history.push("/signup");
+  };
 
   handleSearchSubmit = (term) => {
-      console.log(term)
-      console.log(typeof API_KEY)
-      YTSearch({key: API_KEY, term: term}, videos => {
+    if(term.length > 0){
+      YTSearch({key: API_KEY, term: term, maxResults: 5}, videos => {
         this.setState({
-              videos :videos,
+              videos :videos
             })
       })
-
-  }
+      this.props.history.push(`/search/${term}`);
+    }
+    }
 
   handleSignup = (userObj)=>{
+
       fetch("http://localhost:4000/users", {
         method: 'POST',
         headers: {
@@ -43,26 +70,63 @@ class App extends Component {
           user_email: userObj.email,
           password: userObj.password
         }})
-      }).then(res => res.json)
-      .then(json => console.log)
+      }).then(res => res.json())
+      .then(currentUser => {
+        console.log("return ",currentUser)
+
+        this.setState({currentUser: currentUser.user}, () => {
+          localStorage.setItem("token", currentUser.jwt);
+          this.props.history.push('/')
+        })
+      })
+
   }
 
-  handleLogin = (userObj) => {
-    console.log(userObj)
+  handleLogin = (user) => {
+    this.setState({loginError:false})
+    fetch("http://localhost:4000/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify({ user })
+    })
+      .then(resp => resp.json())
+      .then(currentUser => {
+        this.setState({currentUser: currentUser.user}, () => {
+          localStorage.setItem("token", currentUser.jwt)
+          this.props.history.push('/')
+        })
+      })
+  }
+
+  handleHisClick = (historiesArr) =>{
+    console.log('inside appjs',historiesArr)
+    this.setState({
+      hisClicked: !this.state.hisClicked,
+      userHistories: historiesArr
+    })
+  }
+  handleReset = () => {
+    YTSearch({key: API_KEY, term: "", maxResults: 25}, videos => {
+     this.setState({
+       videos :videos
+     })
+   });
   }
 
   render() {
-    // console.log(this.state.videos)
     return (
       <div className="App">
           <Switch>
-              <Route path ='/login' render={()=> <Login handleSubmit={this.handleLogin}/>} />
+              <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
               <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/' render={()=> <HomeContainer videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+              <Route path ='/' render={()=> <HomeContainer myRef={this.myRef} handleReset={this.handleReset} hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

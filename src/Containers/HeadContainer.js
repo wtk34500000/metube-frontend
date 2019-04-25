@@ -1,29 +1,20 @@
 import React from 'react'
 import SearchBar from '../Components/SearchBar'
 import Logo from '../Components/Logo'
-import SignupButton from '../Components/SignupButton'
-import LoginButton from '../Components/LoginButton'
 
+import UserMenu from '../Components/UserMenu'
 
 const HeadContainer = (props) => {
 
-    // componentDidMount(){
-    //     fetch('http://localhost:4000/users')
-    //     .then(res => res.json())
-    //     .then(console.log)
-    // }
-
     return (
-       <div className="head-container">
+       <div id="head-container">
+       <div ref={props.myRef}></div>
         <Logo />
-        <SearchBar handleSearch={props.handleSearch}/>
-        <SignupButton />
-        <LoginButton />
-        {/* <button></button>
-        <button></button> */}
+        <SearchBar handleSearch={props.handleSearch} handleReset={props.handleReset}/>
+
+       { localStorage.token ? <UserMenu handleHisClick={props.handleHisClick} currentUser={props.currentUser}/> :null}
        </div>
     )
 }
 
 export default HeadContainer;
-

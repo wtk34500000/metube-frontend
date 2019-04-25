@@ -1,9 +1,13 @@
 import React from 'react'
+import '../style/video.css'
 
-const Comment = () => {
+const Comment = (props) => {
+    const arrOfComment =props.comments.map((comment, idx) => <div className="comment" key={idx}><h3>{comment.user_name}</h3><p>{comment.content}</p></div>);
+    console.log("comments boy::: ", props)
+
     return (
-        <div className="comment">
-            <p>comment1: Hello World</p>
+        <div id="comments">
+         {arrOfComment}
         </div>
     )
 }
