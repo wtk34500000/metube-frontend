@@ -58,6 +58,7 @@ class App extends Component {
   handleSignup = (userObj)=>{
       fetch("https://metube-backend.herokuapp.com/signup", {
         method: 'POST',
+        mode: "no-cors",
         headers: {
           'accept': 'application/json',
           'content-type': 'application/json',
@@ -69,7 +70,13 @@ class App extends Component {
           user_email: userObj.email,
           password: userObj.password
         }})
-      }).then(res => console.log("return user promise",res.text()) || res.json())
+      }).then(res => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          throw new Error(res)
+        }
+      })
       .then(currentUser => {
         console.log("return ",currentUser)
 
@@ -77,7 +84,7 @@ class App extends Component {
           localStorage.setItem("token", currentUser.jwt);
           this.props.history.push('/')
         })
-      })
+      }).catch(error => console.log(error))
 
   }
 
