@@ -94,7 +94,7 @@ class App extends Component {
       },
       body: JSON.stringify({ user })
     })
-      .then(resp =>console.log("return user promise",res.text()) || resp.json())
+      .then(resp =>console.log("return user promise",resp.text()) || resp.json())
       .then(currentUser => {
         this.setState({currentUser: currentUser.user}, () => {
           localStorage.setItem("token", currentUser.jwt)
