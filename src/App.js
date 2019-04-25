@@ -59,9 +59,10 @@ class App extends Component {
 
       fetch("https://metube-backend.herokuapp.com/users", {
         method: 'POST',
+        mode: "no-cors",
         headers: {
           'accept': 'application/json',
-          'content-type': 'application/json'
+          'content-type': 'application/json',
         },
         body: JSON.stringify({user:{
           first_name: userObj.first_name,
@@ -70,7 +71,7 @@ class App extends Component {
           user_email: userObj.email,
           password: userObj.password
         }})
-      }).then(res => res.json())
+      }).then(res => console.log("return user promise",res.text()) || res.json())
       .then(currentUser => {
         console.log("return ",currentUser)
 
@@ -86,13 +87,14 @@ class App extends Component {
     this.setState({loginError:false})
     fetch("https://metube-backend.herokuapp.com/login", {
       method: "POST",
+      mode: "no-cors",
       headers: {
         "content-type": "application/json",
         accepts: "application/json"
       },
       body: JSON.stringify({ user })
     })
-      .then(resp => resp.json())
+      .then(resp =>console.log("return user promise",res.text()) || resp.json())
       .then(currentUser => {
         this.setState({currentUser: currentUser.user}, () => {
           localStorage.setItem("token", currentUser.jwt)
