@@ -58,7 +58,6 @@ class App extends Component {
   handleSignup = (userObj)=>{
       fetch("https://metube-backend.herokuapp.com/signup", {
         method: 'POST',
-        mode: "no-cors",
         headers: {
           'accept': 'application/json',
           'content-type': 'application/json',
