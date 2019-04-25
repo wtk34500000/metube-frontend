@@ -56,8 +56,7 @@ class App extends Component {
     }
 
   handleSignup = (userObj)=>{
-
-      fetch("https://metube-backend.herokuapp.com/users", {
+      fetch("https://metube-backend.herokuapp.com/signup", {
         method: 'POST',
         mode: "no-cors",
         headers: {
