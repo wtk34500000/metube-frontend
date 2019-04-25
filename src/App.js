@@ -27,7 +27,7 @@ class App extends Component {
     this.handleReset()
 
     token ?
-      fetch("https://metube-backend.herokuapp.com/current_user", {
+      fetch("https://metube-backend.herokuapp.com/api/current_user", {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -85,7 +85,7 @@ class App extends Component {
 
   handleLogin = (user) => {
     this.setState({loginError:false})
-    fetch("https://metube-backend.herokuapp.com/login", {
+    fetch("https://metube-backend.herokuapp.com/api/login", {
       method: "POST",
       mode: "no-cors",
       headers: {
