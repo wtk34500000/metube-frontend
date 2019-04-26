@@ -93,21 +93,26 @@ class App extends Component {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        accepts: "application/json"
+         "accepts": "application/json"
       },
       body: JSON.stringify({ user })
     })
-      .then(resp =>console.log("return user promise",resp.text()) || resp.json())
+      .then(resp =>{
+        if (resp.ok) {
+          return resp.json()
+        } else {
+          throw new Error(resp)
+        }
+      })
       .then(currentUser => {
         this.setState({currentUser: currentUser.user}, () => {
           localStorage.setItem("token", currentUser.jwt)
           this.props.history.push('/')
         })
-      })
+      }).catch(error => console.log(error))
   }
 
   handleHisClick = (historiesArr) =>{
-    console.log('inside appjs',historiesArr)
     this.setState({
       hisClicked: !this.state.hisClicked,
       userHistories: historiesArr
