@@ -39,7 +39,7 @@ class BottonContainer extends React.Component {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                     accepts: "application/json"
+                     "accepts": "application/json"
                 },
                 body: JSON.stringify({history: {
                     "user_id": currentUser.id,

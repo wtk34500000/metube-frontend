@@ -120,6 +120,7 @@ class App extends Component {
   }
   handleReset = () => {
     YTSearch({key: API_KEY, term: "", maxResults: 25}, videos => {
+      console.log("video!",videos)
      this.setState({
        videos :videos
      })
