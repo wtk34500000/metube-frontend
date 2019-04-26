@@ -116,7 +116,7 @@ class App extends Component {
     this.setState({
       hisClicked: !this.state.hisClicked,
       userHistories: historiesArr
-    })
+    },()=> this.props.history.push("/history"))
   }
   handleReset = () => {
     YTSearch({key: API_KEY, term: "", maxResults: 25}, videos => {
