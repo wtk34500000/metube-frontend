@@ -1,6 +1,6 @@
 # MeTube
 
-<p>This is a MeTube-video sharing website whereregiststered users can search and watch their favorite video through youtube Api </p> 
+<p>This is a MeTube-video sharing website where registstered users can search and watch their favorite video through youtube Api </p> 
 
 # Demo
 <a href="https://metube-app.herokuapp.com">LIVE DEMO</a>
