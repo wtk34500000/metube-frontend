@@ -3,7 +3,7 @@
 <p>This is a MeTube-video sharing website where registstered users can search and watch their favorite video through youtube Api </p> 
 
 # Demo
-<a href="https://metube-app.herokuapp.com">LIVE DEMO</a>
+<a href="https://metube-app.herokuapp.com" target="_blank">LIVE DEMO</a>
 
 <h3> Log in using -- username: wei@gmail.com  password: 1234</h3>
 
