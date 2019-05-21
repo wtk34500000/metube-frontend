@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, FormGroup, FormControl } from "react-bootstrap";
+import {withRouter} from 'react-router-dom';
 import '../style/Login.css'
 
 
@@ -72,4 +73,4 @@ class LoginForm extends Component{
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

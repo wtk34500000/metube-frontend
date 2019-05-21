@@ -3,7 +3,7 @@ import {withRouter } from 'react-router-dom';
 
 class SearchBar extends React.Component{
     state={
-        input:""
+        input: ""
     }
 
     handleSearch = (e) => {
@@ -16,16 +16,18 @@ class SearchBar extends React.Component{
       if(this.state.input.length > 0){
         this.props.history.push('/')
         let input = this.state.input;
-        this.setState({input: ""})
+        this.setState({input: null})
         this.props.handleSearch(input)
       }
     }
 
 
+    
         render(){
             return (
                 <div id="search-bar">
-                {this.props.history.location.pathname==="/" ?
+                
+                {this.props.history.location.pathname === "/" ?
                   this.props.handleReset() :
                   null
               }

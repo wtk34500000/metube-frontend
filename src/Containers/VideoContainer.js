@@ -4,6 +4,7 @@ import {withRouter } from 'react-router-dom';
 
 class VideoContainer extends React.Component{
   render(){
+    console.log("inisde videocontainer", this.props.videos)
       const arrOfVideosId = this.props.videos.map(video => <VideoCard  currentUser={this.props.currentUser} handleSelectVideo={this.props.handleSelectVideo} key={video.id.videoId} videoId={video}/>)
       const arrayOfDivs = []
       let count = 1;

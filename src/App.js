@@ -23,8 +23,9 @@ class App extends Component {
 
 
   componentDidMount = () => {
+    console.log("inside componentDidMount")
     let token = localStorage.token;
-    this.handleReset()
+    // this.handleReset()
 
     token ?
       fetch("http://localhost:4000/api/current_user", {
@@ -45,13 +46,37 @@ class App extends Component {
   };
 
   handleSearchSubmit = (term) => {
-    if(term.length > 0){
-      YTSearch({key: API_KEY, term: term, maxResults: 5}, videos => {
+    console.log(term)
+    // var params = {
+    //   part: 'snippet',
+    //   key: API_KEY,
+    //   q: term,
+    //   type: 'video',
+    //   maxResults: "25"
+    // }
+
+    // console.log("term: ",term)
+    // const maxResults = 25;
+    // const url ="https://www.googleapis.com/youtube/v3/search"
+
+
+    if(term.length >0){
+      console.log("i am inside?")
+      YTSearch({key: API_KEY, term: term, maxResults: 25}, videos => {
+        console.log(videos)
         this.setState({
               videos :videos
-            })
+            }, () => this.props.history.push(`/search/${term}`))
       })
-      this.props.history.push(`/search/${term}`);
+      // fetch(url, {params: params})
+      // .then(res => res.json())
+      // .then(videos => {
+      //   console.log("result: ", videos)
+      //     this.setState({
+      //         videos :videos.items
+      //     }, () => this.props.history.push(`/search/${term}`))
+      // })
+      // this.props.history.push(`/search/${term}`);
     }
     }
 
@@ -102,14 +127,14 @@ class App extends Component {
   }
 
   handleHisClick = (historiesArr) =>{
-    console.log('inside appjs',historiesArr)
     this.setState({
       hisClicked: !this.state.hisClicked,
       userHistories: historiesArr
     })
   }
+
   handleReset = () => {
-    YTSearch({key: API_KEY, term: "", maxResults: 25}, videos => {
+    YTSearch({key: API_KEY, term: "toys", maxResults: 5}, videos => {
      this.setState({
        videos :videos
      })
@@ -120,9 +145,9 @@ class App extends Component {
     return (
       <div className="App">
           <Switch>
-              <Route path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
-              <Route path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
-              <Route path ='/' render={()=> <HomeContainer myRef={this.myRef} handleReset={this.handleReset} hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
+              <Route  path ='/login' render={()=> <Login error={this.state.loginError} handleSubmit={this.handleLogin}/>} />
+              <Route  path ='/signup' render={()=> <Signup handleSubmit={this.handleSignup}/>} />
+              <Route  path ='/' render={()=> <HomeContainer myRef={this.myRef} handleReset={this.handleReset} hisClicked={this.state.hisClicked} userHistories={this.state.userHistories} handleHisClick={this.handleHisClick} currentUser={this.state.currentUser} videos={this.state.videos} handleSearch={this.handleSearchSubmit}/>} />
           </Switch>
       </div>
     );
