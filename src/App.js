@@ -46,31 +46,9 @@ class App extends Component {
   };
 
   handleSearchSubmit = (term) => {
-    console.log(term)
-    var params = {
-      part: 'snippet',
-      key: API_KEY,
-      q: term,
-      type: 'video',
-      maxResults: "25"
-    }
-
+    if(term.length >0){
     const url =`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${term}&type=video&key=${API_KEY}&maxResults=25`
-
-    // console.log("term: ",term)
-    // const maxResults = 25;
-    // const url ="https://www.googleapis.com/youtube/v3/search"
-
-
-    // if(term.length >0){
-    //   console.log("i am inside?")
-    //   YTSearch({key: API_KEY, term: term, maxResults: 25}, videos => {
-    //     console.log(videos)
-    //     this.setState({
-    //           videos :videos
-    //         }, () => this.props.history.push(`/search/${term}`))
-    //   })
-      fetch(url)
+    fetch(url)
       .then(res => res.json())
       .then(videos => {
         console.log("result: ", videos)
@@ -79,6 +57,15 @@ class App extends Component {
           }, () => this.props.history.push(`/search/${term}`))
       })
       this.props.history.push(`/search/${term}`);
+    }
+    // if(term.length >0){
+    //   console.log("i am inside?")
+    //   YTSearch({key: API_KEY, term: term, maxResults: 25}, videos => {
+    //     console.log(videos)
+    //     this.setState({
+    //           videos :videos
+    //         }, () => this.props.history.push(`/search/${term}`))
+    //   })
     // }
     }
 
